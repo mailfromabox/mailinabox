@@ -73,9 +73,9 @@ tools/editconf.py /etc/postfix/main.cf \
 # * Inform users when their e-mail delivery is delayed more than 3 hours (default is not to warn).
 # * Stop trying to send an undeliverable e-mail after 2 days (instead of 5), and for bounce messages just try for 1 day.
 tools/editconf.py /etc/postfix/main.cf \
-	delay_warning_time=3h \
-	maximal_queue_lifetime=2d \
-	bounce_queue_lifetime=1d
+	delay_warning_time=12h \
+	maximal_queue_lifetime=10d \
+	bounce_queue_lifetime=3h
 
 # ### Outgoing Mail
 
@@ -199,8 +199,8 @@ tools/editconf.py /etc/postfix/main.cf virtual_transport=lmtp:[127.0.0.1]:10025
 # whitelisted) then postfix does a DEFER_IF_REJECT, which results in all "unknown user" sorts of messages turning into #NODOC
 # "450 4.7.1 Client host rejected: Service unavailable". This is a retry code, so the mail doesn't properly bounce. #NODOC
 tools/editconf.py /etc/postfix/main.cf \
-	smtpd_sender_restrictions="reject_non_fqdn_sender,reject_unknown_sender_domain,reject_authenticated_sender_login_mismatch,reject_rhsbl_sender dbl.spamhaus.org" \
-	smtpd_recipient_restrictions=permit_sasl_authenticated,permit_mynetworks,"reject_rbl_client zen.spamhaus.org",reject_unlisted_recipient,"check_policy_service inet:127.0.0.1:10023"
+	smtpd_sender_restrictions="reject_non_fqdn_sender,reject_unknown_sender_domain,reject_authenticated_sender_login_mismatch" \
+	smtpd_recipient_restrictions=permit_sasl_authenticated,permit_mynetworks,reject_unlisted_recipient,"check_policy_service inet:127.0.0.1:10023"
 
 # Postfix connects to Postgrey on the 127.0.0.1 interface specifically. Ensure that
 # Postgrey listens on the same interface (and not IPv6, for instance).
@@ -215,7 +215,11 @@ tools/editconf.py /etc/default/postgrey \
 # Increase the message size limit from 10MB to 128MB.
 # The same limit is specified in nginx.conf for mail submitted via webmail and Z-Push.
 tools/editconf.py /etc/postfix/main.cf \
-	message_size_limit=134217728
+	message_size_limit=134217728 \
+    smtp_destination_concurrency_limit = 2 \
+    smtp_destination_rate_delay = 30s \
+    smtp_extra_recipient_limit = 1 \
+    smtp_address_preference = ipv4
 
 # Allow the two SMTP ports in the firewall.
 
