@@ -620,16 +620,7 @@ def check_mail_domain(domain, env, output):
 	if "@" + domain not in [address for address, *_ in get_mail_aliases(env)]:
 		check_alias_exists("Postmaster contact address", "postmaster@" + domain, env, output)
 
-	# Stop if the domain is listed in the Spamhaus Domain Block List.
-	# The user might have chosen a domain that was previously in use by a spammer
-	# and will not be able to reliably send mail.
-	dbl = query_dns(domain+'.dbl.spamhaus.org', "A", nxdomain=None)
-	if dbl is None:
-		output.print_ok("Domain is not blacklisted by dbl.spamhaus.org.")
-	else:
-		output.print_error("""This domain is listed in the Spamhaus Domain Block List (code %s),
-			which may prevent recipients from receiving your mail.
-			See http://www.spamhaus.org/dbl/ and http://www.spamhaus.org/query/domain/%s.""" % (dbl, domain))
+	
 
 def check_web_domain(domain, rounded_time, ssl_certificates, env, output):
 	# See if the domain's A record resolves to our PUBLIC_IP. This is already checked
