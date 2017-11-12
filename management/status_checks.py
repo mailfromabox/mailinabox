@@ -289,14 +289,7 @@ def run_network_checks(env, output):
 	# by a spammer, or the user may be deploying on a residential network. We
 	# will not be able to reliably send mail in these cases.
 	rev_ip4 = ".".join(reversed(env['PUBLIC_IP'].split('.')))
-	zen = query_dns(rev_ip4+'.zen.spamhaus.org', 'A', nxdomain=None)
-	if zen is None:
-		output.print_ok("IP address is not blacklisted by zen.spamhaus.org.")
-	else:
-		output.print_error("""The IP address of this machine %s is listed in the Spamhaus Block List (code %s),
-			which may prevent recipients from receiving your email. See http://www.spamhaus.org/query/ip/%s."""
-			% (env['PUBLIC_IP'], zen, env['PUBLIC_IP']))
-
+	
 def run_domain_checks(rounded_time, env, output, pool):
 	# Get the list of domains we handle mail for.
 	mail_domains = get_mail_domains(env)
