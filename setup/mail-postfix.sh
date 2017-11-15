@@ -215,8 +215,10 @@ tools/editconf.py /etc/default/postgrey \
 # Increase the message size limit from 10MB to 128MB.
 # The same limit is specified in nginx.conf for mail submitted via webmail and Z-Push.
 tools/editconf.py /etc/postfix/main.cf \
-	message_size_limit=134217728 \
-    smtp_destination_concurrency_limit = 2 \
+	message_size_limit=134217728 
+   
+ tools/editconf.py /etc/postfix/main.cf \  
+   smtp_destination_concurrency_limit = 2 \
     smtp_destination_rate_delay = 30s \
     smtp_extra_recipient_limit = 1 \
     smtp_address_preference = ipv4
