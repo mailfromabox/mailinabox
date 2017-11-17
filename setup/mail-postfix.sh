@@ -73,7 +73,7 @@ tools/editconf.py /etc/postfix/main.cf \
 # * Inform users when their e-mail delivery is delayed more than 3 hours (default is not to warn).
 # * Stop trying to send an undeliverable e-mail after 2 days (instead of 5), and for bounce messages just try for 1 day.
 tools/editconf.py /etc/postfix/main.cf \
-	delay_warning_time=12h \
+	delay_warning_time=48h \
 	maximal_queue_lifetime=10d \
 	bounce_queue_lifetime=3h
 
@@ -218,10 +218,10 @@ tools/editconf.py /etc/postfix/main.cf \
 	message_size_limit=134217728 
    
  tools/editconf.py /etc/postfix/main.cf \  
-   smtp_destination_concurrency_limit = 2 \
-    smtp_destination_rate_delay = 30s \
-    smtp_extra_recipient_limit = 1 \
-    smtp_address_preference = ipv4
+   smtp_destination_concurrency_limit=2 \
+    smtp_destination_rate_delay=30s \
+    smtp_extra_recipient_limit=1 \
+    smtp_address_preference=ipv4
 
 # Allow the two SMTP ports in the firewall.
 
