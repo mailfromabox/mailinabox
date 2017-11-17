@@ -107,7 +107,7 @@ tools/editconf.py /etc/postfix/master.cf -s -w \
 # Install the `outgoing_mail_header_filters` file required by the new 'authclean' service.
 cp conf/postfix_outgoing_mail_header_filters /etc/postfix/outgoing_mail_header_filters
 
-# Modify the `outgoing_mail_header_filters` file to use the local machine name and ip 
+# Modify the `outgoing_mail_header_filters` file to use the local machine name and ip
 # on the first received header line.  This may help reduce the spam score of email by
 # removing the 127.0.0.1 reference.
 sed -i "s/PRIMARY_HOSTNAME/$PRIMARY_HOSTNAME/" /etc/postfix/outgoing_mail_header_filters
@@ -215,13 +215,13 @@ tools/editconf.py /etc/default/postgrey \
 # Increase the message size limit from 10MB to 128MB.
 # The same limit is specified in nginx.conf for mail submitted via webmail and Z-Push.
 tools/editconf.py /etc/postfix/main.cf \
-	message_size_limit=134217728 
-   
- tools/editconf.py /etc/postfix/main.cf \  
-   smtp_destination_concurrency_limit=2 \
-    smtp_destination_rate_delay=30s \
-    smtp_extra_recipient_limit=1 \
-    smtp_address_preference=ipv4
+	message_size_limit=134217728
+
+ tools/editconf.py /etc/postfix/main.cf \
+ 		smtp_destination_concurrency_limit=2 \
+		smtp_destination_rate_delay=30s \
+		smtp_extra_recipient_limit=1 \
+		smtp_address_preference=ipv4
 
 # Allow the two SMTP ports in the firewall.
 
