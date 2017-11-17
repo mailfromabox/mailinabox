@@ -219,7 +219,7 @@ tools/editconf.py /etc/postfix/main.cf \
 
  tools/editconf.py /etc/postfix/main.cf \
  		smtp_destination_concurrency_limit=2 \
-		smtp_destination_rate_delay=30s \
+		smtp_destination_rate_delay=160s \
 		smtp_extra_recipient_limit=1 \
 		smtp_address_preference=ipv4
 
