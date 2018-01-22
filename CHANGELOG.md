@@ -4,6 +4,12 @@ CHANGELOG
 In Development
 --------------
 
+* Reduce munin-node.conf log_level to warning(1) as default ubuntu package uses log_level debug(4) which over time creates big log files.
+
+
+v0.26 (January 18, 2018)
+------------------------
+
 Security:
 
 * HTTPS, IMAP, and POP's TLS settings have been updated to Mozilla's intermediate cipher list recommendation. Some extremely old devices that use less secure TLS ciphers may no longer be able to connect to IMAP/POP.
@@ -12,7 +18,7 @@ Security:
 Mail:
 
 * Adding attachments in Roundcube broke after the last update for some users after rebooting because a temporary directory was deleted on reboot. The temporary directory is now moved from /tmp to /var so that it is persistent.
-* `X-Spam-Score` header added to incoming mail.
+* `X-Spam-Score` header is added to incoming mail.
 
 Control panel:
 
@@ -22,7 +28,9 @@ Control panel:
 Installer:
 
 * We now run `apt-get autoremove` at the start of setup to clear out old packages, especially old kernels that take up a lot of space. On the first run, this step may take a long time.
-* We now fetch Z-Push from their tagged git repository, fixing an installation problem.
+* We now fetch Z-Push from its tagged git repository, fixing an installation problem.
+* Some old PHP5 packages are removed from setup, fixing an installation bug where Apache would get installed.
+* Python 3 packages for the control panel are now installed using a virtualenv to prevent installation errors.
 
 v0.25 (November 15, 2017)
 -------------------------
