@@ -219,9 +219,10 @@ tools/editconf.py /etc/postfix/main.cf \
 
  tools/editconf.py /etc/postfix/main.cf \
  		smtp_destination_concurrency_limit=2 \
-		smtp_destination_rate_delay=160s \
+		smtp_destination_rate_delay=60s \
 		smtp_extra_recipient_limit=1 \
-		smtp_address_preference=ipv4
+		qmgr_message_active_limit=200000 \
+        qmgr_message_recipient_limit=2000000
 
 # Allow the two SMTP ports in the firewall.
 
