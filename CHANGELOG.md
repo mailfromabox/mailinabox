@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+In Development
+--------------
+
+* Update to Nextcloud 13.0.5.
+* Update to Roundcube 1.3.7.
+
 v0.28 (July 30, 2018)
 ---------------------
 
